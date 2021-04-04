@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import ar.com.mercadolibre.exam.covid19.christianzelaya.entity.Checks;
@@ -46,6 +47,17 @@ public class CheckController {
 	@GetMapping
 	public ResponseEntity<List<Checks>> findAll(){
 		List<Checks> checks = (List<Checks>) checkService.findAll();
+		return ResponseEntity.ok(checks);
+		
+	}
+	
+	@GetMapping("/search")
+	public ResponseEntity<List<Checks>> filterChecks(
+		    @RequestParam (name = "key", required = true) String key,
+		    @RequestParam (name = "values", required = true) String values){
+		String hola = key;
+		String chau = values;
+		List<Checks> checks = (List<Checks>) checkService.findAll();;
 		return ResponseEntity.ok(checks);
 		
 	}
