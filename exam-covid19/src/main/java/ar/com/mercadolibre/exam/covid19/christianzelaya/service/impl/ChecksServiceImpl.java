@@ -1,5 +1,8 @@
 package ar.com.mercadolibre.exam.covid19.christianzelaya.service.impl;
 
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
 
 import javax.persistence.EntityNotFoundException;
@@ -11,28 +14,23 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import ar.com.mercadolibre.exam.covid19.christianzelaya.entity.Checks;
-import ar.com.mercadolibre.exam.covid19.christianzelaya.repository.CheckRepository;
-import ar.com.mercadolibre.exam.covid19.christianzelaya.service.CheckService;
+import ar.com.mercadolibre.exam.covid19.christianzelaya.repository.ChecksRepository;
+import ar.com.mercadolibre.exam.covid19.christianzelaya.service.ChecksService;
 
 @Service
-public class CheckServiceImpl implements CheckService {
+public class ChecksServiceImpl implements ChecksService {
 	
 	private static Integer cont = 1, totalSequences = 0;
 
 	@Autowired
-	private CheckRepository checkRepository;
+	private ChecksRepository checkRepository;
 	
 	@Override
 	@Transactional(readOnly = true)
-	public Iterable<Checks> findAll() {
+	public Iterable<Checks> findAllChecks() {
 		return checkRepository.findAll();
 	}
 
-	@Override
-	@Transactional(readOnly = true)
-	public Page<Checks> findAll(Pageable pageable) {
-		return checkRepository.findAll(pageable);
-	}
 
 	@Override
 	@Transactional(readOnly = true)
@@ -48,11 +46,22 @@ public class CheckServiceImpl implements CheckService {
 	public Checks save(Checks check) {
 		return checkRepository.save(check);
 	}
-
+	
 	@Override
-	@Transactional
-	public void deleteById(int id) {
-		checkRepository.deleteById(id);
+	@Transactional(readOnly = true)
+	public Iterable<Checks> filterCheck(String key, String result) {
+		String[] prueba = result.replaceAll("\\s+","").split(",");
+		List<String> myList = Arrays.asList(prueba);
+		if("RESULT".equals(key.toUpperCase())) {
+			return checkRepository.filterCheckResult(myList);
+		}
+		
+		if("COUNTRY".equals(key.toUpperCase())) {
+			return checkRepository.filterCheckCountry(myList);
+		}
+		
+		throw new EntityNotFoundException("El dato ingresado para filtrar no es valido");
+		
 	}
 	
 	public String covidResult(String[] dna) {

@@ -16,15 +16,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import ar.com.mercadolibre.exam.covid19.christianzelaya.entity.Checks;
-import ar.com.mercadolibre.exam.covid19.christianzelaya.service.CheckService;
+import ar.com.mercadolibre.exam.covid19.christianzelaya.service.ChecksService;
 
 @CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/covid/checks")
-public class CheckController {
+public class ChecksController {
 	
 	@Autowired
-	private CheckService checkService;
+	private ChecksService checkService;
 	
 	/**
 	 * Create a new Check in Database
@@ -32,7 +32,7 @@ public class CheckController {
 	 * @return saved Check
 	 */
 	@PostMapping
-	public ResponseEntity<Checks> create(@RequestBody Checks check){
+	public ResponseEntity<Checks> createCheck(@RequestBody Checks check){
 		check.setResult(checkService.covidResult(check.getDna()));
 		return ResponseEntity.status(HttpStatus.CREATED).body(checkService.save(check));
 	}
@@ -45,8 +45,8 @@ public class CheckController {
 	}
 	
 	@GetMapping
-	public ResponseEntity<List<Checks>> findAll(){
-		List<Checks> checks = (List<Checks>) checkService.findAll();
+	public ResponseEntity<List<Checks>> findAllChecks(){
+		List<Checks> checks = (List<Checks>) checkService.findAllChecks();
 		return ResponseEntity.ok(checks);
 		
 	}
@@ -55,9 +55,8 @@ public class CheckController {
 	public ResponseEntity<List<Checks>> filterChecks(
 		    @RequestParam (name = "key", required = true) String key,
 		    @RequestParam (name = "values", required = true) String values){
-		String hola = key;
-		String chau = values;
-		List<Checks> checks = (List<Checks>) checkService.findAll();;
+		
+		List<Checks> checks = (List<Checks>) checkService.filterCheck(key, values);
 		return ResponseEntity.ok(checks);
 		
 	}

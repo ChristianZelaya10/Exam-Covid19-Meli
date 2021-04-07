@@ -3,6 +3,7 @@ package ar.com.mercadolibre.exam.covid19.christianzelaya.exception;
 import javax.persistence.EntityNotFoundException;
 
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,7 +24,18 @@ public class GlobalRestErrorController extends ResponseEntityExceptionHandler {
 		ApiErrorResponse apiError = new ApiErrorResponse();
 		apiError.setMessage(ex.getMessage());
 		apiError.setMethod(webRequest.getHttpMethod().name());
-		apiError.setStatus(HttpStatus.NOT_FOUND);
+		apiError.setStatus(HttpStatus.NOT_FOUND.value());
+		
+		return ResponseEntity.status(apiError.getStatus()).body(apiError);
+	}
+	
+	@ExceptionHandler({DuplicateKeyException.class})
+	public ResponseEntity<Object> handleException(DuplicateKeyException ex, ServletWebRequest webRequest){
+		
+		ApiErrorResponse apiError = new ApiErrorResponse();
+		apiError.setMessage(ex.getMessage());
+		apiError.setMethod(webRequest.getHttpMethod().name());
+		apiError.setStatus(HttpStatus.NOT_FOUND.value());
 		
 		return ResponseEntity.status(apiError.getStatus()).body(apiError);
 	}
@@ -34,7 +46,7 @@ public class GlobalRestErrorController extends ResponseEntityExceptionHandler {
 		ApiErrorResponse apiError = new ApiErrorResponse();
 		apiError.setMessage(ex.getMessage());
 		apiError.setMethod(webRequest.getHttpMethod().name());
-		apiError.setStatus(HttpStatus.NOT_FOUND);
+		apiError.setStatus(HttpStatus.BAD_REQUEST.value());
 		
 		return ResponseEntity.status(apiError.getStatus()).body(apiError);
 	}
@@ -45,7 +57,7 @@ public class GlobalRestErrorController extends ResponseEntityExceptionHandler {
 		ApiErrorResponse apiError = new ApiErrorResponse();
 		apiError.setMessage(ex.getMessage());
 		apiError.setMethod(webRequest.getHttpMethod().name());
-		apiError.setStatus(HttpStatus.NOT_FOUND);
+		apiError.setStatus(HttpStatus.NOT_FOUND.value());
 		
 		return ResponseEntity.status(apiError.getStatus()).body(apiError);
 	}
@@ -56,7 +68,18 @@ public class GlobalRestErrorController extends ResponseEntityExceptionHandler {
 		ApiErrorResponse apiError = new ApiErrorResponse();
 		apiError.setMessage(ex.getMessage());
 		apiError.setMethod(webRequest.getHttpMethod().name());
-		apiError.setStatus(HttpStatus.NOT_FOUND);
+		apiError.setStatus(HttpStatus.NOT_FOUND.value());
+		
+		return ResponseEntity.status(apiError.getStatus()).body(apiError);
+	}
+	
+	@ExceptionHandler({IllegalArgumentException.class})
+	public ResponseEntity<Object> handlerException(IllegalArgumentException ex, ServletWebRequest webRequest){
+		
+		ApiErrorResponse apiError = new ApiErrorResponse();
+		apiError.setMessage(ex.getMessage());
+		apiError.setMethod(webRequest.getHttpMethod().name());
+		apiError.setStatus(HttpStatus.BAD_REQUEST.value());
 		
 		return ResponseEntity.status(apiError.getStatus()).body(apiError);
 	}

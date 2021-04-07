@@ -8,6 +8,7 @@ class ExamCovid19ApplicationTests {
 
 	@Test
 	void contextLoads() {
+		ExamCovid19Application.main(new String[] {});
 	}
 
 }

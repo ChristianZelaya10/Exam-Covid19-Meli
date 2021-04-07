@@ -6,14 +6,15 @@ import org.springframework.http.HttpStatus;
 
 public class ApiErrorResponse {
 
-	private HttpStatus status;
+	private int status;
 	private String message;
 	private String method;
 	private List<ApiSubError> subErrors;
-	public HttpStatus getStatus() {
+	
+	public int getStatus() {
 		return status;
 	}
-	public void setStatus(HttpStatus status) {
+	public void setStatus(int status) {
 		this.status = status;
 	}
 	public String getMessage() {
