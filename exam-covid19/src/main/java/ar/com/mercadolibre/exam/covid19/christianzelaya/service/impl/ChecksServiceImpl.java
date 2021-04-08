@@ -52,6 +52,7 @@ public class ChecksServiceImpl implements ChecksService {
 	public Iterable<Checks> filterCheck(String key, String result) {
 		String[] prueba = result.replaceAll("\\s+","").split(",");
 		List<String> myList = Arrays.asList(prueba);
+		Iterable<Checks> a = checkRepository.filterCheckResult(myList);
 		if("RESULT".equals(key.toUpperCase())) {
 			return checkRepository.filterCheckResult(myList);
 		}

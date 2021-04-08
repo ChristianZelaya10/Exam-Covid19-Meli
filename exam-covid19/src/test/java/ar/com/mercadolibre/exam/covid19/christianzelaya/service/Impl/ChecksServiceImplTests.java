@@ -1,6 +1,6 @@
 package ar.com.mercadolibre.exam.covid19.christianzelaya.service.Impl;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.Optional;
 
@@ -70,13 +70,13 @@ public class ChecksServiceImplTests {
         //Optional<?> queryResult = repository.findById(1);
         Mockito.when(repository.findById(Mockito.anyInt())).thenReturn(check1);
         
-        System.out.println(check1.isPresent());
+        System.out.println(repository.findById(Mockito.anyInt()));
         
     };
 	
-	@Test
+    @Test
 	void findAllTest() {
-		
+		System.out.println(serviceImpl.findAllChecks());
 	}
 	
 	@Test
@@ -93,7 +93,7 @@ public class ChecksServiceImplTests {
     }
 	
 	@Test
-    void filterTest() {
+    void filterTestResult() {
     	Checks check = new Checks();
         check.setName("test");
         check.setCountry("Argentina");
@@ -106,6 +106,22 @@ public class ChecksServiceImplTests {
         System.out.println(serviceImpl.filterCheck("RESULT", "Sano"));
         
     }
+	
+	@Test
+    void filterTestCountry() {
+    	Checks check = new Checks();
+        check.setName("test");
+        check.setCountry("Argentina");
+        check.setDna(DNA);
+        
+        Iterable<Checks> listFilter;
+        
+        //Mockito.when(serviceImpl.filterCheck("RESULT", "Sano")).thenReturn([check]);
+        
+        System.out.println(serviceImpl.filterCheck("COUNTRY", "Argentina"));
+        
+    }
+
 	
 	@Test
     void covidResultTestInfected() {

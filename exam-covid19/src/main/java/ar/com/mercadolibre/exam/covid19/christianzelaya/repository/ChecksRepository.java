@@ -14,7 +14,7 @@ public interface ChecksRepository extends JpaRepository<Checks, Integer> {
 	@Query(value = "select count(*) from Checks where result = (:result)")
 	 int countCheckResult(@Param("result") String result);
 	
-	@Query(value = "SELECT * FROM Checks as c where result IN :filter", nativeQuery = true)
+	@Query(value = "SELECT * FROM checks where result IN :filter", nativeQuery = true)
 	Iterable<Checks> filterCheckResult(@Param("filter") List<String> filter);
 	
 	@Query(value = "SELECT * FROM checks where country IN :filter", nativeQuery = true)
