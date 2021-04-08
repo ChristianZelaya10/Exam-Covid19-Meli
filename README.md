@@ -159,4 +159,4 @@ Para la ejecucion de los test automaticos utilice jUnit.
 Si bien la cobertura de codigo en la herramienta Codecov muestra un 70%, ejecutando los test localmente con la herramienta
 Jacoco nos da 78%.
 
-![coverage](./doc/images/coverage.png)
+./exam-covid19/coverage.png
