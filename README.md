@@ -59,7 +59,7 @@ URL hosteada en Amazon: http://ec2-18-218-75-220.us-east-2.compute.amazonaws.com
 #### Checks
 
 Request: 
-- POST hhttp://ec2-18-218-75-220.us-east-2.compute.amazonaws.com:8080/covid/checks
+- POST http://ec2-18-218-75-220.us-east-2.compute.amazonaws.com:8080/covid/checks
 
 Request body (caso Infectado):
 
