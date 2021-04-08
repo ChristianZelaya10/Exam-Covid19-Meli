@@ -18,7 +18,6 @@ Se puede ver una version estable del proyecto aqui:
     - [Estadisticas](#estadisticas)
 - [Test](#test)
   - [Automaticos](#automaticos)
-  - [Scripts](#scripts)
   - [Cobertura](#cobertura)
 
 ## Ejercicio
