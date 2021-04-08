@@ -1,4 +1,4 @@
-# Ejercicio Registro de COVID-19 - Mercado libre
+# Ejercicio Registro de COVID-19 - Mercado libre - Backend
 
 Ejercicio práctico para MercadoLibre. 
 
