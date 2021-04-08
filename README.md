@@ -16,7 +16,7 @@ Se puede ver una version estable del proyecto aqui:
   - [Uso](#uso)
   - [API Url](#api)
   - [Servicios](#servicios)
-    - [Es mutante](#es-mutante)
+    - [Checks](#checks)
     - [Estadisticas](#estadisticas)
 - [Test](#test)
   - [Automaticos](#automaticos)
