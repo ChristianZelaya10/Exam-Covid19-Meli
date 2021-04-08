@@ -8,9 +8,7 @@ Se puede ver una version estable del proyecto aqui:
 - [Servicio de estadisticas](http://ec2-18-218-75-220.us-east-2.compute.amazonaws.com:8080/covid/stats)
 
 - [Ejercicio](#ejercicio)
-  - [Especificaciones](#especificaciones)
   - [Implementación y tecnologias usadas](#implementaci%C3%B3n-y-tecnologias-usadas)
-  - [Comentarios relevantes](#comentarios-relevantes)
 - [Setup](#setup)
   - [Instrucciones](#instrucciones)
   - [Uso](#uso)
@@ -25,23 +23,19 @@ Se puede ver una version estable del proyecto aqui:
 
 ## Ejercicio
 
-### Especificaciones
-
 
 ### Implementacion y tecnologias usadas
 
-Se utilizó Java como el lenguaje de programacion utilizando Spring Boot. Los reportes de test coverage hechos con JaCoCo.
+Se utilizó Java como el lenguaje de programacion utilizando Spring Boot. Los reportes de test coverage hechos con JaCoCo y utilice jUnit para la ejecución de los test.
 
 La aplicación está subida a AWS EC2 y tiene su base alojada en RDS de Amazon, la misma utiliza mySQL.
-
-### Comentarios relevantes
 
 
 ## Setup
 
 ### Instrucciones
 Para compilar y ejecutar proyecto es necesario contar con la version 11.0.5 de la JDK y Maven para la gestion de las dependencias.
-El aplicación la esta apuntando a la base alojada en RDS de amazon asi que que no es necesario correr ningun script.
+La aplicación le esta apuntando a la base alojada en RDS de amazon asi que que no es necesario correr ningun script.
 
 Clonar este repositorio: https://github.com/ChristianZelaya10/Exam-Covid19-Meli.git
 
@@ -138,7 +132,7 @@ Response:
 Request: 
 - http://ec2-18-218-75-220.us-east-2.compute.amazonaws.com:8080/covid/stats
 
-Response: 200 (application/json)
+Response:
 
 ```
 {
