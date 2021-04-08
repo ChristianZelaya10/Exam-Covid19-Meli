@@ -2,8 +2,6 @@ package ar.com.mercadolibre.exam.covid19.christianzelaya.util;
 
 import java.util.List;
 
-import org.springframework.http.HttpStatus;
-
 public class ApiErrorResponse {
 
 	private int status;

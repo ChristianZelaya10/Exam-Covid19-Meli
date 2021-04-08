@@ -4,18 +4,15 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.Optional;
 
-import javax.persistence.EntityNotFoundException;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.HttpStatus;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
@@ -24,6 +21,7 @@ import ar.com.mercadolibre.exam.covid19.christianzelaya.entity.Checks;
 import ar.com.mercadolibre.exam.covid19.christianzelaya.repository.ChecksRepository;
 import ar.com.mercadolibre.exam.covid19.christianzelaya.service.ChecksService;
 import ar.com.mercadolibre.exam.covid19.christianzelaya.service.impl.ChecksServiceImpl;
+import ar.com.mercadolibre.exam.covid19.christianzelaya.util.ApiErrorResponse;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -52,7 +50,7 @@ public class ChecksServiceImplTests {
 	
 	@BeforeEach
 	public void setup() {
-		this.mockMvc = MockMvcBuilders.webAppContextSetup(this.appContext).build();
+		mockMvc = MockMvcBuilders.webAppContextSetup(this.appContext).build();
 	}
 	
 	@Test
@@ -64,11 +62,16 @@ public class ChecksServiceImplTests {
         check.setDna(DNA);
         check.setResult("Sano");
         
-        serviceImpl.save(check);
+        repository.save(check);
         
         Optional<Checks> check1 = Optional.of(check);
-        //Optional<?> queryResult = repository.findById(1);
         Mockito.when(repository.findById(Mockito.anyInt())).thenReturn(check1);
+        
+        try {
+            serviceImpl.findById(2);
+        } catch (Exception e) {
+        	assertEquals("El elemento buscado no existe", e.getMessage());
+        }
         
         System.out.println(repository.findById(Mockito.anyInt()));
         
@@ -88,8 +91,6 @@ public class ChecksServiceImplTests {
         
         Mockito.when(serviceImpl.save(check)).thenReturn(check);
         
-        System.out.println(check.getResult());
-        
     }
 	
 	@Test
@@ -98,10 +99,6 @@ public class ChecksServiceImplTests {
         check.setName("test");
         check.setCountry("Argentina");
         check.setDna(DNA);
-        
-        Iterable<Checks> listFilter;
-        
-        //Mockito.when(serviceImpl.filterCheck("RESULT", "Sano")).thenReturn([check]);
         
         System.out.println(serviceImpl.filterCheck("RESULT", "Sano"));
         
@@ -114,11 +111,32 @@ public class ChecksServiceImplTests {
         check.setCountry("Argentina");
         check.setDna(DNA);
         
-        Iterable<Checks> listFilter;
-        
-        //Mockito.when(serviceImpl.filterCheck("RESULT", "Sano")).thenReturn([check]);
-        
         System.out.println(serviceImpl.filterCheck("COUNTRY", "Argentina"));
+        
+    }
+	
+	@Test
+    void filterTestError() {
+    	Checks check = new Checks();
+        check.setName("test");
+        check.setCountry("Argentina");
+        check.setDna(DNA);
+        
+        try {
+        	serviceImpl.filterCheck("Error", "Argentina");
+        } catch (Exception e) {
+        	ApiErrorResponse error = new ApiErrorResponse();
+        	error.setMessage(e.getMessage());
+        	error.setMethod("GET");
+        	error.setStatus(HttpStatus.BAD_REQUEST.value());
+        	error.setSubErrors(null);
+        	
+        	assertEquals("El dato ingresado para filtrar no es valido", error.getMessage());
+        	assertEquals(error.getMethod(), "GET");
+        	assertEquals(error.getStatus(), 400);
+        	assertEquals(error.getSubErrors(), null);
+        	
+        }
         
     }
 

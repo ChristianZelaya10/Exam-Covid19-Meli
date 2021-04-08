@@ -1,15 +1,12 @@
 package ar.com.mercadolibre.exam.covid19.christianzelaya.service.impl;
 
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
 import javax.persistence.EntityNotFoundException;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -50,9 +47,10 @@ public class ChecksServiceImpl implements ChecksService {
 	@Override
 	@Transactional(readOnly = true)
 	public Iterable<Checks> filterCheck(String key, String result) {
-		String[] prueba = result.replaceAll("\\s+","").split(",");
-		List<String> myList = Arrays.asList(prueba);
-		Iterable<Checks> a = checkRepository.filterCheckResult(myList);
+		
+		String[] resultArray = result.replaceAll("\\s+","").split(",");
+		List<String> myList = Arrays.asList(resultArray);
+
 		if("RESULT".equals(key.toUpperCase())) {
 			return checkRepository.filterCheckResult(myList);
 		}

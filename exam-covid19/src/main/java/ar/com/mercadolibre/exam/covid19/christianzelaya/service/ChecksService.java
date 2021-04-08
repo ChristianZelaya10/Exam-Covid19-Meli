@@ -2,9 +2,6 @@ package ar.com.mercadolibre.exam.covid19.christianzelaya.service;
 
 import java.util.Optional;
 
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-
 import ar.com.mercadolibre.exam.covid19.christianzelaya.entity.Checks;
 
 public interface ChecksService {
