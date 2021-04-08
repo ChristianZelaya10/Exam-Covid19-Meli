@@ -146,7 +146,7 @@ Response:
 
 #### Automaticos
 
-Para la ejecucion de los test automaticos utilice jUnit.
+Para la ejecución de los test automáticos utilice jUnit.
 
 #### Cobertura
 
