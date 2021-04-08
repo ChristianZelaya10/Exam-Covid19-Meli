@@ -150,6 +150,6 @@ Para la ejecucion de los test automaticos utilice jUnit.
 
 #### Cobertura
 
-Ejecutando los test localmente con la herramienta Jacoco nos da 78%.
+Ejecutando los test localmente con la herramienta Jacoco nos da 82,6%.
 ![Aquí la descripción de la imagen por si no carga](https://github.com/ChristianZelaya10/Exam-Covid19-Meli/blob/master/exam-covid19/coverage.PNG)
 
